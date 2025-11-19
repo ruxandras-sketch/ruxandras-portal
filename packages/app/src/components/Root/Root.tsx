@@ -5,8 +5,8 @@ import ExtensionIcon from '@material-ui/icons/Extension';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import CreateIcon from '@material-ui/icons/AddCircleOutline';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 
-import AddCircleIcon from '@material-ui/icons/AddCircleOutline';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
 import {
@@ -31,6 +31,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
 import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
+
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -80,7 +81,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateIcon} to="create" text="Create..." />
         <SidebarItem icon={CreateComponentIcon} to="catalog-import" text="Register" />
-
+        <SidebarItem icon={DoneAllIcon} to='soundcheck' text='Soundcheck' />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>

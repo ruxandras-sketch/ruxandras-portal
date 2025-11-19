@@ -62,6 +62,12 @@ import {
   EntityGithubActionsContent,
   isGithubActionsAvailable,
 } from '@backstage-community/plugin-github-actions';
+import { RandomJokeCard } from '@internal/plugin-random-joke';
+import {
+  EntitySoundcheckContent,
+  EntitySoundcheckCard,
+} from '@spotify/backstage-plugin-soundcheck';
+import { GroupSoundcheckContent } from '@spotify/backstage-plugin-soundcheck';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -75,13 +81,13 @@ const cicdContent = (
   // This is an example of how you can implement your company's logic in entity page.
   // You can for example enforce that all components of type 'service' should use GitHubActions
   <EntitySwitch>
-    
-      Here you can add support for different CI/CD services, for example
-      using @backstage-community/plugin-github-actions as follows:
-      <EntitySwitch.Case if={isGithubActionsAvailable}>
-        <EntityGithubActionsContent />
-      </EntitySwitch.Case>
-    
+
+    {/* Here you can add support for different CI/CD services, for example
+      using @backstage-community/plugin-github-actions as follows: */}
+    <EntitySwitch.Case if={isGithubActionsAvailable}>
+      <EntityGithubActionsContent />
+    </EntitySwitch.Case>
+
     <EntitySwitch.Case>
       <EmptyState
         title="No CI/CD available for this entity"
@@ -145,6 +151,12 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    <Grid item md={6}>
+      <RandomJokeCard />
+    </Grid>
+    <Grid item md={6} xs={12}>
+      <EntitySoundcheckCard />
+    </Grid>
   </Grid>
 );
 
@@ -164,6 +176,10 @@ const serviceEntityPage = (
       if={isKubernetesAvailable}
     >
       <EntityKubernetesContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path='/soundcheck' title='Soundcheck'>
+      <EntitySoundcheckContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/api" title="API">
@@ -331,6 +347,16 @@ const groupPage = (
           <EntityLinksCard />
         </Grid>
       </Grid>
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+      <GroupSoundcheckContent />
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/soundcheck-overview" title="Soundcheck Overview">
+      <GroupSoundcheckContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/soundcheck" title="Soundcheck Certifications">
+      <EntitySoundcheckContent />
     </EntityLayout.Route>
   </EntityLayout>
 );

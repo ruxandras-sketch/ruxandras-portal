@@ -16,6 +16,8 @@ backend:
     allow:
       - host: 'gist.githubusercontent.com'
       - host: 'github.com'
+      - host: 'ghe.spotify.net'
+      - host: 'spotify.ghe.com'
   baseUrl: http://localhost:7007
   listen:
     port: 7007
@@ -43,7 +45,7 @@ integrations:
       # about setting up the GitHub integration here: https://backstage.io/docs/integrations/github/locations#configuration
       token: ${GITHUB_TOKEN}
     ### Example for how to add your GitHub Enterprise instance using the API:
-    # - host: ghe.example.net
+    # - host: ghe.spotify.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
 
@@ -80,7 +82,7 @@ catalog:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location, Group, User]
+    - allow: [ System, API, Component, Resource, Location, Group, User, Template, Domain ]
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
@@ -115,3 +117,34 @@ kubernetes:
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+  permissionedPlugins:
+     - catalog
+     - scaffolder
+     - soundcheck
+
+soundcheck:
+  techInsights:
+    enabled: true
+    showExperimentalVisualizations: true
+  techHealth:
+    caching:
+      trends:
+        enabled: true
+        cacheTtl: 600
+      snapshots:
+        enabled: true
+        cacheTtl: 30
+  results:
+    history:
+      enable: true
+      retentionTimeInDays: 90
+      cleanupFrequencyCron: '0 0 0 * * *'
+      cleanupTimeoutInMinutes: 5
+  certifications:
+    history:
+      enable: true
+      retentionTimeInDays: 90
+      cleanupFrequencyCron: '0 0 0 * * *'
+      cleanupTimeoutInMinutes: 5
+
+    

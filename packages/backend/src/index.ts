@@ -78,7 +78,6 @@ const customAuth = createBackendModule({
   },
 });
 
-
 const backend = createBackend();
 
 backend.add(import('@backstage/plugin-app-backend'));
@@ -137,6 +136,9 @@ backend.add(import('@backstage/plugin-signals-backend'));
 // backend.add(import('@backstage/plugin-auth-backend-module-github-provider'));
 backend.add(customAuth);
 
-
+backend.add(import('@spotify/backstage-plugin-soundcheck-backend'));
+backend.add(
+  import('@spotify/backstage-plugin-soundcheck-backend-module-github'),
+);
 
 backend.start();

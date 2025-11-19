@@ -38,6 +38,8 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { NotificationsPage } from '@backstage/plugin-notifications';
 import { SignalsDisplay } from '@backstage/plugin-signals';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { RandomJokePage } from '@internal/plugin-random-joke';
+import { SoundcheckRoutingPage } from '@spotify/backstage-plugin-soundcheck';
 
 const app = createApp({
   apis,
@@ -59,7 +61,7 @@ const app = createApp({
     });
   },
   components: {
-    SignInPage: props => <SignInPage {...props} auto providers={['guest', {id: 'github-auth-provider', title: 'GitHub', message: 'Sign in using GitHub', apiRef: githubAuthApiRef,}]} />,
+    SignInPage: props => <SignInPage {...props} auto providers={['guest', {id: 'github-auth-provider', title: 'GitHub', message: 'Sign in using GitHub', apiRef: githubAuthApiRef,}, {id: 'ghe-auth-provider', title: 'GHE', message: 'Sign in using GHE', apiRef: githubAuthApiRef,}]} />,
   },
 });
 
@@ -98,6 +100,11 @@ const routes = (
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/notifications" element={<NotificationsPage />} />
+    <Route path="/random-joke" element={<RandomJokePage />} />
+    <Route
+      path='/soundcheck'
+      element={<SoundcheckRoutingPage title='This is Soundcheck' />}
+    />
   </FlatRoutes>
 );
 
